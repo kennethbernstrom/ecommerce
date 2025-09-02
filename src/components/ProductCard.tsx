@@ -34,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <p className="mt-1 text-[--color-dark-500] text-[length:var(--text-body)] leading-[var(--text-body--line-height)]">
-          Men's Shoes
+          Men&apos;s Shoes
         </p>
         <p className="mt-1 text-[--color-dark-700] text-[length:var(--text-caption)] leading-[var(--text-caption--line-height)]">
           6 Colour
