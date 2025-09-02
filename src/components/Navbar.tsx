@@ -24,7 +24,7 @@ export default function Navbar({ cartCount = 0, className }: NavbarProps) {
     <nav
       role="navigation"
       aria-label="Primary"
-      className={`sticky top-0 z-40 w-full bg-[--color-light-100] ${className || ""}`}
+      className={`sticky top-0 z-40 w-full bg-[--color-dark-900] ${className || ""}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -35,7 +35,7 @@ export default function Navbar({ cartCount = 0, className }: NavbarProps) {
 
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-[--color-dark-900] hover:bg-[--color-light-200] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-dark-900] md:hidden"
+              className="inline-flex items-center justify-center rounded-md p-2 text-[--color-light-100] hover:bg-[--color-dark-800] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-light-100] md:hidden"
               aria-controls="mobile-menu"
               aria-expanded={open}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -72,7 +72,7 @@ export default function Navbar({ cartCount = 0, className }: NavbarProps) {
               <li key={l.label}>
                 <Link
                   href={l.href}
-                  className="text-[--color-dark-900] text-[length:var(--text-body)] leading-[var(--text-body--line-height)] font-[var(--text-body-medium--font-weight)] hover:text-[--color-dark-700] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-dark-900] rounded"
+                  className="text-[--color-light-100] text-[length:var(--text-body)] leading-[var(--text-body--line-height)] font-[var(--text-body-medium--font-weight)] hover:text-[--color-light-300] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-light-100] rounded"
                 >
                   {l.label}
                 </Link>
@@ -82,14 +82,14 @@ export default function Navbar({ cartCount = 0, className }: NavbarProps) {
 
           <div className="hidden md:flex items-center gap-6">
             <button
-              className="text-[--color-dark-900] hover:text-[--color-dark-700] text-[length:var(--text-body)] leading-[var(--text-body--line-height)]"
+              className="text-[--color-light-100] hover:text-[--color-light-300] text-[length:var(--text-body)] leading-[var(--text-body--line-height)]"
               aria-label="Search"
             >
               Search
             </button>
             <Link
               href="#"
-              className="text-[--color-dark-900] font-[var(--text-body-medium--font-weight)]"
+              className="text-[--color-light-100] font-[var(--text-body-medium--font-weight)]"
               aria-label="View cart"
             >
               My Cart ({cartCount})
@@ -100,21 +100,21 @@ export default function Navbar({ cartCount = 0, className }: NavbarProps) {
 
       <div
         id="mobile-menu"
-        className={`md:hidden ${open ? "block" : "hidden"} border-t border-[--color-light-300]`}
+        className={`md:hidden ${open ? "block" : "hidden"} border-t border-[--color-dark-700]`}
       >
         <div className="space-y-1 px-4 pb-4 pt-2">
           {links.map((l) => (
             <Link
               key={l.label}
               href={l.href}
-              className="block rounded-md px-3 py-2 text-[--color-dark-900] hover:bg-[--color-light-200] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-dark-900]"
+              className="block rounded-md px-3 py-2 text-[--color-light-100] hover:bg-[--color-dark-800] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-light-100]"
             >
               {l.label}
             </Link>
           ))}
-          <div className="mt-2 flex items-center justify-between rounded-md bg-[--color-light-200] px-3 py-2">
-            <span className="text-[--color-dark-900]">Search</span>
-            <Link href="#" className="text-[--color-dark-900]">
+          <div className="mt-2 flex items-center justify-between rounded-md bg-[--color-dark-800] px-3 py-2">
+            <span className="text-[--color-light-100]">Search</span>
+            <Link href="#" className="text-[--color-light-100]">
               Cart ({cartCount})
             </Link>
           </div>
