@@ -24,7 +24,7 @@ export default function Navbar({ cartCount = 0, className }: NavbarProps) {
     <nav
       role="navigation"
       aria-label="Primary"
-      className={`sticky top-0 z-40 w-full bg-[--color-light-100] border-b border-[--color-light-300] ${className || ""}`}
+      className={`sticky top-0 z-40 w-full bg-[--color-light-100] ${className || ""}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
