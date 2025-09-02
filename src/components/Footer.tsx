@@ -32,7 +32,7 @@ export default function Footer({ className, year = new Date().getFullYear() }: F
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-3">
             <Link href="#" aria-label="Home" className="inline-flex">
-              <Image src="/logo.svg" alt="Nike" width={40} height={40} />
+              <Image src="/logo.svg" alt="Nike" width={40} height={40} className="invert-0" />
             </Link>
           </div>
 
