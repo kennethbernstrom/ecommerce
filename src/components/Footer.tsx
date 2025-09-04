@@ -26,11 +26,11 @@ export default function Footer({ className, year = new Date().getFullYear() }: F
   return (
     <footer
       aria-label="Footer"
-      className={`mt-16 w-full bg-[--color-dark-900] text-[--color-light-100] ${className || ""}`}
+      className={`mt-16 w-full bg-dark-900 text-light-100 ${className || ""}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <Link href="#" aria-label="Home" className="inline-flex">
               <Image src="/logo.svg" alt="Nike" width={40} height={40} className="invert-0" />
             </Link>
@@ -47,7 +47,7 @@ export default function Footer({ className, year = new Date().getFullYear() }: F
                     <li key={l}>
                       <Link
                         href="#"
-                        className="text-[--color-dark-500] hover:text-[--color-light-100] text-[length:var(--text-body)] leading-[var(--text-body--line-height)]"
+                        className="text-[var(--color-dark-500)] hover:text-[var(--color-light-100)] text-[length:var(--text-body)] leading-[var(--text-body--line-height)]"
                       >
                         {l}
                       </Link>
@@ -58,14 +58,14 @@ export default function Footer({ className, year = new Date().getFullYear() }: F
             ))}
           </div>
 
-          <div className="md:col-span-1 flex md:justify-end">
-            <div className="flex items-center gap-4">
+          <div className="md:col-span-2 flex md:justify-end">
+            <div className="flex items-start gap-4">
               {socials.map((s) => (
                 <Link
                   key={s.alt}
                   href={s.href}
                   aria-label={s.alt}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[--color-light-100] text-[--color-dark-900] hover:opacity-90"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-light-100)] text-[var(--color-dark-900)] hover:opacity-90"
                 >
                   <Image src={s.src} alt={s.alt} width={18} height={18} />
                 </Link>
@@ -74,7 +74,7 @@ export default function Footer({ className, year = new Date().getFullYear() }: F
           </div>
         </div>
 
-        <div className="mt-10 border-t border-[--color-dark-700]/40 pt-6 text-[--color-dark-500] text-[length:var(--text-footnote)] leading-[var(--text-footnote--line-height)]">
+        <div className="mt-10 pt-6 text-[var(--color-dark-500)] text-[length:var(--text-footnote)] leading-[var(--text-footnote--line-height)]">
           <p>&copy; {year} Nike. All rights reserved.</p>
         </div>
       </div>

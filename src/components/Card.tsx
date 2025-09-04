@@ -30,16 +30,16 @@ export default function Card({
   footerNote,
 }: CardProps) {
   const content = (
-      <div
-        className={`group overflow-hidden  ${className || ""}`}
+      <article
+        className={`group rounded-xl bg-light-100 ring-1 ring-light-300 transition-colors hover:ring-dark-500  ${className || ""}`}
       >
-        <div className="relative aspect-[4/5] w-full bg-white flex items-center justify-center">
+        <div className="relative aspect-square overflow-hidden rounded-t-xl bg-light-200">
           <Image
             src={imageSrc}
             alt={imageAlt || title}
             fill
             sizes="100vw"
-            className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             priority={false}
           />
           {badgeText ? (
@@ -55,7 +55,7 @@ export default function Card({
               {title}
             </h3>
             {price !== undefined ? (
-              <span className="shrink-0 text-gray-900 text-base font-semibold opacity-70">
+              <span className="text-dark-900 text-body-small text-sm">
                 {typeof price === "number" ? `$${Number(price).toFixed(2)}` : price}
               </span>
             ) : null}
@@ -79,12 +79,12 @@ export default function Card({
             </p>
           ) : null}
         </div>
-      </div>
+      </article>
     );
 
   if (href) {
     return (
-      <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-dark-900] rounded-xl">
+      <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-dark-900 rounded-xl">
         {content}
       </Link>
     );
