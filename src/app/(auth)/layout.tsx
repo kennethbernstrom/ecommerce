@@ -9,29 +9,36 @@ const jost = Jost({
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${jost.className} min-h-dvh grid grid-cols-1 md:grid-cols-2`}>
-      <aside className="hidden md:flex flex-col justify-between bg-dark-900 text-light-100 p-8 lg:p-12 rounded-r-[24px]">
-        <div className="flex items-center">
-          <div className="rounded-xl bg-light-100 p-2">
-            <Image src="/logo.svg" alt="" width={28} height={28} />
+    <div className="flex min-h-screen">
+      {/* Left Side */}
+      <div className="w-1/2 bg-black text-white flex flex-col relative min-w-0">
+        {/* Logo */}
+        <div className="absolute top-12 left-16">
+          <div className="bg-orange rounded-xl flex items-center justify-center w-14 h-14">
+            <img src="/logo.svg" alt="Nike Logo" className="w-8 h-8" />
           </div>
         </div>
-        <div className="max-w-md">
-          <h2 className="text-[--text-heading-3] leading-[--text-heading-3--line-height] font-semibold">Just Do It</h2>
-          <p className="mt-3 text-[--text-body] leading-[--text-body--line-height] text-dark-500">
+        {/* Centered Headline and Description */}
+        <div className="flex flex-1 flex-col justify-center items-start px-16">
+          <h1 className="text-5xl font-extrabold mb-6 tracking-tight">Just Do It</h1>
+          <p className="text-lg text-white/80 mb-0 max-w-sm leading-relaxed">
             Join millions of athletes and fitness enthusiasts who trust Nike for their performance needs.
           </p>
-          <div className="mt-6 flex gap-2">
-            <span className="h-2 w-2 rounded-full bg-light-300" />
-            <span className="h-2 w-2 rounded-full bg-light-300/60" />
-            <span className="h-2 w-2 rounded-full bg-light-300/40" />
+          <div className="flex space-x-2 mt-8">
+            <span className="w-2 h-2 bg-white rounded-full inline-block" />
+            <span className="w-2 h-2 bg-white/60 rounded-full inline-block" />
+            <span className="w-2 h-2 bg-white/60 rounded-full inline-block" />
           </div>
         </div>
-        <p className="text-[--text-footnote] text-dark-700">&copy; {new Date().getFullYear()} Nike. All rights reserved.</p>
-      </aside>
-      <main className="flex items-center justify-center p-6 md:p-10">
-        <div className="w-full max-w-md">{children}</div>
-      </main>
+        {/* Footer */}
+        <div className="absolute bottom-8 left-16 text-xs text-white/60">
+          © 2024 Nike. All rights reserved.
+        </div>
+      </div>
+      {/* Right Side */}
+      <div className="w-1/2 flex items-center justify-center bg-white min-w-0">
+        <div className="w-full max-w-md p-10">{children}</div>
+      </div>
     </div>
   );
 }
