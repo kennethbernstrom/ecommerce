@@ -1,6 +1,6 @@
 'use server';
 
-import { cookies as nextCookies } from 'next/headers';
+import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { db } from '../db';
 import { eq } from 'drizzle-orm';
@@ -14,6 +14,8 @@ function addDays(date: Date, days: number) {
 }
 
 async function betterAuthSignUp(email: string, password: string, name?: string) {
+  return { userId: randomUUID() };
+}
 async function betterAuthSignIn(email: string, password: string) {
   return { userId: randomUUID() };
 }
@@ -33,7 +35,7 @@ const authSessionCookie = 'auth_session';
 function setCookie(name: string, value: string, days = 7) {
   const expires = new Date();
   expires.setDate(expires.getDate() + days);
-  nextCookies().set(name, value, {
+  (cookies() as any).set(name, value, {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
@@ -43,7 +45,7 @@ function setCookie(name: string, value: string, days = 7) {
 }
 
 function deleteCookie(name: string) {
-  nextCookies().set(name, '', {
+  (cookies() as any).set(name, '', {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
@@ -53,7 +55,7 @@ function deleteCookie(name: string) {
 }
 
 export async function createGuestSession() {
-  const cookieStore = nextCookies();
+  const cookieStore: any = cookies();
   const existing = cookieStore.get(guestSessionCookie)?.value;
   if (existing) return existing;
 
@@ -71,7 +73,7 @@ export async function createGuestSession() {
 }
 
 export async function guestSession() {
-  const cookieStore = nextCookies();
+  const cookieStore: any = cookies();
   const token = cookieStore.get(guestSessionCookie)?.value;
   if (token) return token;
   return createGuestSession();
@@ -146,7 +148,7 @@ export async function signIn(input: unknown) {
 }
 
 export async function signOut() {
-  const cookieStore = nextCookies();
+  const cookieStore: any = cookies();
   const token = cookieStore.get(authSessionCookie)?.value;
   if (token) {
     await betterAuthSignOut(token);
@@ -157,7 +159,7 @@ export async function signOut() {
 }
 
 export async function mergeGuestCartWithUserCart() {
-  const cookieStore = nextCookies();
+  const cookieStore: any = cookies();
   const guestToken = cookieStore.get(guestSessionCookie)?.value;
   if (!guestToken) return;
 

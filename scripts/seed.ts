@@ -1,5 +1,5 @@
 import { db } from '../src/lib/db';
-import { products } from '../src/lib/db/schema';
+import { products } from '../src/lib/db/schema/index';
 import * as dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
