@@ -6,6 +6,18 @@ import { db } from '../db';
 import { eq } from 'drizzle-orm';
 import { users, accounts, sessions, guests } from '../db/schema/index';
 import { randomUUID } from 'crypto';
+type CookieValue = { value?: string };
+type CookieStore = {
+  get(name: string): CookieValue | undefined;
+  set(name: string, value: string, options?: {
+    httpOnly?: boolean;
+    secure?: boolean;
+    sameSite?: 'strict' | 'lax' | 'none';
+    path?: string;
+    expires?: Date;
+  }): void;
+};
+
 
 function addDays(date: Date, days: number) {
   const d = new Date(date);
@@ -13,13 +25,13 @@ function addDays(date: Date, days: number) {
   return d;
 }
 
-async function betterAuthSignUp(email: string, password: string, name?: string) {
+async function betterAuthSignUp(_email: string, _password: string, _name?: string) {
   return { userId: randomUUID() };
 }
-async function betterAuthSignIn(email: string, password: string) {
+async function betterAuthSignIn(_email: string, _password: string) {
   return { userId: randomUUID() };
 }
-async function betterAuthSignOut(sessionToken: string) {
+async function betterAuthSignOut(_sessionToken: string) {
   return true;
 }
 
@@ -35,7 +47,7 @@ const authSessionCookie = 'auth_session';
 function setCookie(name: string, value: string, days = 7) {
   const expires = new Date();
   expires.setDate(expires.getDate() + days);
-  (cookies() as any).set(name, value, {
+  (cookies() as unknown as CookieStore).set(name, value, {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
@@ -45,7 +57,7 @@ function setCookie(name: string, value: string, days = 7) {
 }
 
 function deleteCookie(name: string) {
-  (cookies() as any).set(name, '', {
+  (cookies() as unknown as CookieStore).set(name, '', {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
@@ -55,7 +67,7 @@ function deleteCookie(name: string) {
 }
 
 export async function createGuestSession() {
-  const cookieStore: any = cookies();
+  const cookieStore = cookies() as unknown as CookieStore;
   const existing = cookieStore.get(guestSessionCookie)?.value;
   if (existing) return existing;
 
@@ -73,7 +85,7 @@ export async function createGuestSession() {
 }
 
 export async function guestSession() {
-  const cookieStore: any = cookies();
+  const cookieStore = cookies() as unknown as CookieStore;
   const token = cookieStore.get(guestSessionCookie)?.value;
   if (token) return token;
   return createGuestSession();
@@ -148,7 +160,7 @@ export async function signIn(input: unknown) {
 }
 
 export async function signOut() {
-  const cookieStore: any = cookies();
+  const cookieStore = cookies() as unknown as CookieStore;
   const token = cookieStore.get(authSessionCookie)?.value;
   if (token) {
     await betterAuthSignOut(token);
@@ -159,7 +171,7 @@ export async function signOut() {
 }
 
 export async function mergeGuestCartWithUserCart() {
-  const cookieStore: any = cookies();
+  const cookieStore = cookies() as unknown as CookieStore;
   const guestToken = cookieStore.get(guestSessionCookie)?.value;
   if (!guestToken) return;
 
