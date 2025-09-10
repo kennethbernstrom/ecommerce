@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const { db } = await import("@/lib/db");
-    const { products } = await import("@/lib/db/schema");
+    const { products } = await import("@/lib/db/schema/index");
     const allProducts = await db.select().from(products);
     return NextResponse.json(allProducts);
   } catch (error) {
